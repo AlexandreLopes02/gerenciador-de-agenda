@@ -9,15 +9,26 @@ internal class Program
 
         while (opcao != 6)
         {
-            Console.WriteLine("Gerenciador de Agenda");
-            Console.WriteLine("1. Adicionar Contato");
-            Console.WriteLine("2. Listar Contatos");
-            Console.WriteLine("3. Editar Contato");
-            Console.WriteLine("4. Remover contato");
-            Console.WriteLine("5. Buscar contato");
-            Console.WriteLine("6. Sair");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("========================================");
+            Console.WriteLine("          GERENCIADOR DE AGENDA");
+            Console.WriteLine("========================================");
+            Console.ResetColor();
+
+            Console.WriteLine("1.  Adicionar Contato");
+            Console.WriteLine("2.  Listar Contatos");
+            Console.WriteLine("3.  Editar Contato");
+            Console.WriteLine("4.  Remover Contato");
+            Console.WriteLine("5.  Buscar Contato");
+            Console.WriteLine("6.  Sair");
+            Console.WriteLine("----------------------------------------");
             Console.Write("Escolha uma opção: ");
-            opcao = int.Parse(Console.ReadLine() ?? "0");
+
+            if (!int.TryParse(Console.ReadLine(), out opcao))
+                opcao = 0;
+
+            Console.Clear();
             switch (opcao)
             {
                 case 1:
@@ -36,13 +47,23 @@ internal class Program
                     gerenciador.BuscarContato();
                     break;
                 case 6:
-                    Console.WriteLine("Saindo...");
+                    Console.WriteLine("Saindo... Até logo!");
                     break;
                 default:
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Opção inválida. Tente novamente.");
+                    Console.ResetColor();
                     break;
             }
-            Console.WriteLine();
+
+            if (opcao != 6)
+            {
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("Pressione qualquer tecla para voltar ao menu...");
+                Console.ResetColor();
+                Console.ReadKey();
+            }
         }
     }
 }
